@@ -182,7 +182,7 @@ const MusicHeroSection: React.FC = () => {
               {currentTrackData.title}
             </h1>
             <div
-              className="text-sm font-lexend font-[400]  md:text-base lg:text[20px] text-gray-300 leading-relaxed max-w-[606px] mx-auto"
+              className="text-[14px] font-lexend font-[400]  md:text-base lg:text[20px] text-gray-300 leading-relaxed max-w-[606px] mx-auto"
               dangerouslySetInnerHTML={{ __html: currentTrackData.description }}
             />
           </div>

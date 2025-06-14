@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#161616] text-white text-center pb-8 px-4">
+    <footer className="bg-[#161616] text-white text-center pt-8 pb-8 px-4">
       <div className="flex justify-center mb-4">
         <a
           href="https://instagram.com"
@@ -21,11 +21,11 @@ const Footer = () => {
       </div>
       <a
         href="mailto:wainwrightm19@gmail.com"
-        className="text-sm sm:text-base mb-2 font-lexend tracking-widest hover:underline block"
+        className="text-[12px] md:text-[18px] mb-2 font-lexend tracking-widest hover:underline block"
       >
         wainwrightm19@gmail.com
       </a>
-      <p className="text-xs sm:text-sm font-lexend tracking-widest">
+      <p className="text-[12px] md:text-[18px] font-lexend tracking-widest">
         ©2025 4MATT - ALL RIGHT RESERVED
       </p>
     </footer>
