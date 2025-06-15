@@ -114,24 +114,24 @@ const MusicHeroSection: React.FC = () => {
       </nav>
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[80vh] mt-[100px] px-6 md:px-8">
-        <div className="flex items-center space-x-6 md:space-x-8 mb-8 md:mb-12">
+        <div className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 mb-8 md:mb-12">
           <button
             onClick={handlePrevious}
-            className="text-white transition-colors p-2"
+            className="text-white transition-colors p-1 sm:p-2"
             disabled={tracks.length === 0}
           >
             <Image
               src="/back.svg"
-              height={24}
-              width={24}
+              height={20}
+              width={20}
               alt="icons"
-              className="md:w-8 md:h-8"
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
             />
           </button>
 
           <button
             onClick={handlePlayPause}
-            className="bg-white/20 w-[150px] h-[150px] md:w-[237px] md:h-[237px] rounded-full p-4 md:p-6 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center"
+            className="bg-white/20 w-[100px] h-[100px]  md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] rounded-full p-3 sm:p-4 md:p-5 lg:p-6 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center"
             disabled={tracks.length === 0}
           >
             {isPlaying ? (
@@ -140,7 +140,7 @@ const MusicHeroSection: React.FC = () => {
                 width={100}
                 height={100}
                 alt="icons"
-                className="text-white w-12 h-12 md:w-24 md:h-24"
+                className="text-white w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24"
               />
             ) : (
               <Image
@@ -148,22 +148,22 @@ const MusicHeroSection: React.FC = () => {
                 width={100}
                 height={100}
                 alt="icons"
-                className="text-white w-[82px] h-[82px] md:w-[127px] md:h-[127px]"
+                className="text-white w-[50px] h-[50px] xs:w-[60px] xs:h-[60px] sm:w-[70px] sm:h-[70px] md:w-[90px] md:h-[90px] lg:w-[110px] lg:h-[110px] xl:w-[127px] xl:h-[127px]"
               />
             )}
           </button>
 
           <button
             onClick={handleNext}
-            className="text-white hover:text-gray-300 transition-colors p-2"
+            className="text-white hover:text-gray-300 transition-colors p-1 sm:p-2"
             disabled={tracks.length === 0}
           >
             <Image
               src="/forward.svg"
-              height={24}
-              width={24}
+              height={20}
+              width={20}
               alt="icons"
-              className="md:w-8 md:h-8"
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
             />
           </button>
         </div>
