@@ -95,7 +95,7 @@ const MusicHeroSection: React.FC = () => {
           className="w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
           style={{
             backgroundImage: `url(${currentTrackData.poster.url})`,
-            filter: isPlaying ? "" : "grayscale(100%) brightness(2.6)",
+            filter: isPlaying ? "" : "grayscale(100%) brightness(2.2)",
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90" />
