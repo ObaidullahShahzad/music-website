@@ -4,11 +4,10 @@ import { fetchTracks } from "@/lib/api";
 import { Track } from "@/types/track";
 import Image from "next/image";
 
-const MusicHeroSection: React.FC = () => {
+const MusicHeroSection = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -24,10 +23,7 @@ const MusicHeroSection: React.FC = () => {
     if (!audio) return;
 
     audio.addEventListener("ended", handleTrackEnd);
-
-    return () => {
-      audio.removeEventListener("ended", handleTrackEnd);
-    };
+    return () => audio.removeEventListener("ended", handleTrackEnd);
   }, [currentTrack]);
 
   const handlePlayPause = () => {
@@ -44,40 +40,18 @@ const MusicHeroSection: React.FC = () => {
 
   const handleTrackEnd = () => {
     setIsPlaying(false);
-    // setCurrentTime(0);
   };
 
   const handleNext = () => {
     if (tracks.length === 0) return;
-    setIsTransitioning(true);
-
-    setTimeout(() => {
-      const nextTrack = (currentTrack + 1) % tracks.length;
-      setCurrentTrack(nextTrack);
-      setIsPlaying(false);
-      //   setCurrentTime(0);
-
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 500);
-    }, 500);
+    setCurrentTrack((prev) => (prev + 1) % tracks.length);
+    setIsPlaying(false);
   };
 
   const handlePrevious = () => {
     if (tracks.length === 0) return;
-    setIsTransitioning(true);
-
-    setTimeout(() => {
-      const prevTrack =
-        currentTrack === 0 ? tracks.length - 1 : currentTrack - 1;
-      setCurrentTrack(prevTrack);
-      setIsPlaying(false);
-      //   setCurrentTime(0);
-
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 500);
-    }, 500);
+    setCurrentTrack((prev) => (prev === 0 ? tracks.length - 1 : prev - 1));
+    setIsPlaying(false);
   };
 
   const currentTrackData = tracks[currentTrack] || {
@@ -101,7 +75,7 @@ const MusicHeroSection: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90" />
       </div>
 
-      <nav className="relative z-10 max-w-[1280px] mx-auto flex justify-between items-center p-6 md:p-8">
+      <nav className="relative z-10 max-w-[1280px] mx-auto flex justify-between items-center !pt-[70px] p-6 md:p-8">
         <button className="text-white font-[800] tracking-widest text-sm md:text-[24px] hover:text-gray-300 transition-colors">
           ABOUT
         </button>
@@ -113,25 +87,25 @@ const MusicHeroSection: React.FC = () => {
         </button>
       </nav>
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[80vh] mt-[100px] px-6 md:px-8">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[80vh] mt-[70px] px-6 md:px-8">
         <div className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 mb-8 md:mb-12">
           <button
             onClick={handlePrevious}
-            className="text-white transition-colors p-1 sm:p-2"
+            className="text-white transition-colors p-1 sm:p-2 md:mr-[80px]"
             disabled={tracks.length === 0}
           >
             <Image
               src="/back.svg"
               height={20}
               width={20}
-              alt="icons"
-              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
+              alt="previous"
+              className="w-6 h-6 md:w-[50px] md:h-[50px]"
             />
           </button>
 
           <button
             onClick={handlePlayPause}
-            className="bg-white/20 w-[100px] h-[100px]  md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] rounded-full p-3 sm:p-4 md:p-5 lg:p-6 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center"
+            className="bg-white/20 w-[100px] h-[100px] md:mr-[80px] md:w-[180px] md:h-[180px] lg:w-[237px] lg:h-[237px] rounded-full p-3 sm:p-4 md:p-5 lg:p-6 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center"
             disabled={tracks.length === 0}
           >
             {isPlaying ? (
@@ -139,7 +113,7 @@ const MusicHeroSection: React.FC = () => {
                 src="/pause.svg"
                 width={100}
                 height={100}
-                alt="icons"
+                alt="pause"
                 className="text-white w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24"
               />
             ) : (
@@ -147,8 +121,8 @@ const MusicHeroSection: React.FC = () => {
                 src="/play.svg"
                 width={100}
                 height={100}
-                alt="icons"
-                className="text-white w-[50px] h-[50px] xs:w-[60px] xs:h-[60px] sm:w-[70px] sm:h-[70px] md:w-[90px] md:h-[90px] lg:w-[110px] lg:h-[110px] xl:w-[127px] xl:h-[127px]"
+                alt="play"
+                className="text-white w-[50px] h-[50px] xs:w-[60px] xs:h-[60px] sm:w-[70px] sm:h-[70px] md:w-[90px] md:h-[90px] lg:w-[110px] lg:h-[110px] xl:w-[82px] xl:h-[127px]"
               />
             )}
           </button>
@@ -162,29 +136,61 @@ const MusicHeroSection: React.FC = () => {
               src="/forward.svg"
               height={20}
               width={20}
-              alt="icons"
-              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
+              alt="next"
+              className="w-6 h-6 md:w-[50px] md:h-[50px]"
             />
           </button>
         </div>
 
-        <div className="text-center max-w-4xl">
-          <div
-            className={`transition-all duration-500 ease-in-out ${
-              isTransitioning
-                ? currentTrack > 0
-                  ? "transform -translate-x-20 opacity-0"
-                  : "transform translate-x-20 opacity-0"
-                : "transform translate-x-0 opacity-100"
-            }`}
-          >
-            <h1 className="text-4xl md:text-[36px] lg:text-[54px] font-[800] tracking-wider mb-4 md:mb-6">
+        {/* Mobile & Tablet: Show only current track */}
+        <div className="w-full flex justify-center items-center max-w-[1440px] mx-auto xl:hidden">
+          <div className=" w-full px-4 text-center">
+            <h1 className="text-4xl md:text-[36px] lg:text-[54px] font-[800] tracking-wider mb-4 md:mb-6 whitespace-nowrap">
               {currentTrackData.title}
             </h1>
             <div
-              className="text-[14px] font-lexend font-[400]  md:text-base lg:text[20px] text-gray-300 leading-relaxed max-w-[606px] mx-auto"
+              className="text-[14px] pb-[30px] font-lexend font-[400] md:text-[20px] text-[#B6B6B6] leading-relaxed"
               dangerouslySetInnerHTML={{ __html: currentTrackData.description }}
             />
+          </div>
+        </div>
+
+        {/* Large screens: Show current track centered with next track visible */}
+        <div className="w-full justify-center items-center  mx-auto hidden xl:flex">
+          <div
+            className="flex justify-center items-center transition-transform duration-500 ease-in-out"
+            style={{
+              transform: `translateX(calc(-${currentTrack * 100}% + 25%))`,
+            }}
+          >
+            {tracks.map((track, index) => (
+              <div
+                key={index}
+                className={` text-center transition-opacity duration-500 ${
+                  index === currentTrack
+                    ? "opacity-100"
+                    : index === (currentTrack + 1) % tracks.length
+                    ? "opacity-60"
+                    : "opacity-30"
+                }`}
+              >
+                <div className="max-w-[700px] w-full px-4">
+                  <h1
+                    className={`font-[800] tracking-wider mb-4 md:mb-6 whitespace-nowrap ${
+                      index === currentTrack ? "text-[54px]" : "text-[36px]"
+                    }`}
+                  >
+                    {track.title}
+                  </h1>
+                  <div
+                    className={`pb-[30px] font-lexend font-[400] text-[#B6B6B6] leading-relaxed ${
+                      index === currentTrack ? "text-[20px]" : "text-[16px]"
+                    }`}
+                    dangerouslySetInnerHTML={{ __html: track.description }}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

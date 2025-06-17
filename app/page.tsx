@@ -33,9 +33,11 @@ export default function Home() {
 
   return (
     <>
-      <MusicHeroSection />
-      <MusicStudioSection />
-      <Footer />
+      <div className="bg-[#151515]">
+        <MusicHeroSection />
+        <MusicStudioSection />
+        <Footer />
+      </div>
     </>
   );
 }
