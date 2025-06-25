@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#161616] text-white h-fit pt-[20px] md:pt-[100px] text-center  pb-8 px-4">
+    <footer className="bg-[#161616] text-white h-fit pt-[20px] md:pt-[50px] text-center  pb-8 px-4">
       <div className="flex justify-center mb-[30px]">
         <a
           href="https://instagram.com"

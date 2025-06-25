@@ -20,15 +20,18 @@ export const fetchTracks = async (): Promise<Track[]> => {
     return data.data.map((item) => ({
       id: item.id,
       title: item.title,
-      description: item.description
-        .map((desc) => desc.children.map((child) => child.text).join(" "))
-        .join(" "),
+      description:
+        item.description
+          ?.map(
+            (desc) => desc.children?.map((child) => child.text).join(" ") || ""
+          )
+          .join(" ") || "",
       subtitle: item.subtitle || "",
       poster: {
-        url: item.poster[0]?.url ? `${STRAPI_URL}${item.poster[0].url}` : "",
+        url: item.poster?.[0]?.url ? `${STRAPI_URL}${item.poster[0].url}` : "", // Return empty string instead of null
       },
       audio: {
-        url: item.audio[0]?.url ? `${STRAPI_URL}${item.audio[0].url}` : "",
+        url: item.audio?.[0]?.url ? `${STRAPI_URL}${item.audio[0].url}` : "", // Return empty string instead of null
       },
     }));
   } catch (error) {
