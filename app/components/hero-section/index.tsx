@@ -235,7 +235,7 @@ const MusicHeroSection = () => {
                   {currentTrackData.title}
                 </h1>
                 <div
-                  className="text-[20px] pb-[30px] font-lexend font-[400] leading-relaxed text-[#B6B6B6]"
+                  className="text-[20px]  font-lexend font-[400] leading-relaxed text-[#B6B6B6]"
                   dangerouslySetInnerHTML={{
                     __html: currentTrackData.description,
                   }}
