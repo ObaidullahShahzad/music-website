@@ -2128,7 +2128,7 @@ lottie-react@^2.4.1:
   dependencies:
     lottie-web "^5.10.2"
 
-lottie-web@^5.10.2:
+lottie-web@^5.10.2, lottie-web@^5.13.0:
   version "5.13.0"
   resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.13.0.tgz#441d3df217cc8ba302338c3f168e1a3af0f221d3"
   integrity sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ==
@@ -2781,6 +2781,11 @@ styled-jsx@5.1.6:
   integrity sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==
   dependencies:
     client-only "0.0.1"
+
+stylelint-recommended-conf@^1.5.2:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/stylelint-recommended-conf/-/stylelint-recommended-conf-0.0.1-security.tgz#d6f419cbb16d561a8a5e4155c6f8a4744be5e502"
+  integrity sha512-yO0syZC5KyE28xuaqrNLDo18EY4zbI1MLydCWUOv2fdoAEqLOHvnNAbHXZNERLhGjLg44FmVkgNa2NZLLnKRtg==
 
 supports-color@^7.1.0:
   version "7.2.0"

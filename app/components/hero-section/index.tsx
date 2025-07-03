@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { fetchTracks } from "@/lib/api";
 import { Track } from "@/types/track";
 import Image from "next/image";
+import lottie from "lottie-web"; // Import lottie-web
 
 const MusicHeroSection = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -10,6 +11,32 @@ const MusicHeroSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [direction, setDirection] = useState<"left" | "right" | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const lottieContainerRef = useRef<HTMLDivElement>(null); // Ref for Lottie container
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Initialize Lottie animation when loading
+  useEffect(() => {
+    if (isLoading && lottieContainerRef.current) {
+      const animation = lottie.loadAnimation({
+        container: lottieContainerRef.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/loader.json", // Path to your Lottie JSON file
+      });
+
+      // Clean up the animation when the component unmounts or isLoading changes
+      return () => animation.destroy();
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     const loadTracks = async () => {
@@ -87,29 +114,28 @@ const MusicHeroSection = () => {
     audio: { url: "" },
   };
 
-  return (
-    <div className="relative h-screen bg-black text-white overflow-hidden">
-      <div className="absolute inset-0">
-        <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
-          style={{
-            backgroundImage: `url(${currentTrackData.poster.url})`,
-            filter: isPlaying ? "" : "grayscale(100%) brightness(2.2)",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90" />
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center  bg-black">
+        <div ref={lottieContainerRef} className="w-full  object-cover" />
       </div>
+    );
+  }
 
-      <nav className="relative z-10 max-w-[1280px] mx-auto flex justify-between items-center !pt-[70px] p-6 md:p-8">
-        <button className="text-white font-[800] tracking-widest text-sm md:text-[24px] hover:text-gray-300 transition-colors">
-          ABOUT
-        </button>
+  return (
+    <div className="relative bg-black text-white overflow-hidden">
+      <Image
+        src="/background_sample.jpg"
+        alt="logo"
+        className="w-full h-full inset-0 absolute object-cover"
+        height={102}
+        width={244}
+      />
+
+      <nav className="relative z-10 max-w-[1280px] mx-auto flex justify-center items-center !pt-[70px] p-6 md:p-8">
         <div className="text-2xl md:text-3xl font-light tracking-wider">
           <Image src="/music-logo.svg" alt="logo" height={102} width={244} />
         </div>
-        <button className="text-white font-[800] tracking-widest text-sm md:text-[24px] hover:text-gray-300 transition-colors">
-          SOUNDS
-        </button>
       </nav>
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[80vh] mt-[70px] px-6 md:px-8">
@@ -210,7 +236,7 @@ const MusicHeroSection = () => {
                   {hasPreviousTrack ? getTrackData(currentTrack - 1).title : ""}
                 </h1>
                 <div
-                  className="text-[16px] pb-[30px] font-lexend font-[400] text-[#B6B6B6] leading-relaxed"
+                  className="text-[16px] pb-[30px] font-lexend font-[400] text-[#B66B6B6] leading-relaxed"
                   dangerouslySetInnerHTML={{
                     __html: hasPreviousTrack
                       ? getTrackData(currentTrack - 1).description
@@ -235,7 +261,7 @@ const MusicHeroSection = () => {
                   {currentTrackData.title}
                 </h1>
                 <div
-                  className="text-[20px]  font-lexend font-[400] leading-relaxed text-[#B6B6B6]"
+                  className="text-[20px] font-lexend font-[400] leading-relaxed text-[#B6B6B6]"
                   dangerouslySetInnerHTML={{
                     __html: currentTrackData.description,
                   }}
@@ -272,6 +298,33 @@ const MusicHeroSection = () => {
           </div>
         </div>
       </div>
+      <footer className="text-white h-fit relative z-10 pt-[20px] md:pt-[30px] text-center pb-8 px-4">
+        <div className="flex justify-center mb-[30px]">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <Image
+              src="/insta.svg"
+              alt="Instagram"
+              width={44}
+              height={44}
+              className="hover:opacity-75 transition"
+            />
+          </a>
+        </div>
+        <a
+          href="mailto:music4matt@outlook.com"
+          className="text-[12px] md:text-[20px] mb-[30px] font-[500] font-lexend tracking-widest hover:underline block"
+        >
+          music4matt@outlook.com
+        </a>
+        <p className="text-[12px] md:text-[20px] font-[500] font-lexend tracking-widest">
+          ©2025 4MATT - ALL RIGHT RESERVED
+        </p>
+      </footer>
 
       <audio
         ref={audioRef}
