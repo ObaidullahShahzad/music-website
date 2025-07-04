@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { fetchTracks } from "@/lib/api";
 import { Track } from "@/types/track";
 import Image from "next/image";
-import lottie from "lottie-web"; // Import lottie-web
+import lottie from "lottie-web";
 
 const MusicHeroSection = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -12,7 +12,7 @@ const MusicHeroSection = () => {
   const [direction, setDirection] = useState<"left" | "right" | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const lottieContainerRef = useRef<HTMLDivElement>(null); // Ref for Lottie container
+  const lottieContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,7 +22,6 @@ const MusicHeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Initialize Lottie animation when loading
   useEffect(() => {
     if (isLoading && lottieContainerRef.current) {
       const animation = lottie.loadAnimation({
@@ -30,10 +29,9 @@ const MusicHeroSection = () => {
         renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "/loader.json", // Path to your Lottie JSON file
+        path: "/loader.json",
       });
 
-      // Clean up the animation when the component unmounts or isLoading changes
       return () => animation.destroy();
     }
   }, [isLoading]);
@@ -116,7 +114,7 @@ const MusicHeroSection = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center  bg-black">
+      <div className="flex justify-center items-center bg-black">
         <div
           ref={lottieContainerRef}
           className="w-full h-[50vh] md:h-auto object-cover"
@@ -126,24 +124,49 @@ const MusicHeroSection = () => {
   }
 
   return (
-    <div className="relative bg-black text-white overflow-hidden">
-      <div className="insect-0 w-full h-full absolute">
+    <div className="relative bg-black text-white overflow-hidden min-h-screen">
+      {/* Background Image with multiple fallback methods */}
+      <div className="absolute inset-0 w-full h-full">
+        {/* Method 1: Using Next.js Image component for better optimization */}
         <Image
           src="/background_sample.jpg"
-          alt="logo"
-          className=" h-full w-full object-contain bg-no-repeat bg-center"
-          height={102}
-          width={244}
+          alt="Background"
+          fill
+          className="object-cover object-center"
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+          priority
         />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
       </div>
 
-      <nav className="relative z-10 max-w-[1280px] mx-auto flex justify-center items-center !pt-[70px] p-6 md:p-8">
+      {/* Alternative CSS Background Method (comment out the Image above and uncomment this if needed) */}
+      {/* 
+      <div 
+        className="absolute inset-0 w-full h-full"
+        style={{
+          background: `
+            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('/background_sample.jpg')
+          `,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed'
+        }}
+      />
+      */}
+
+      <nav className="relative z-20 max-w-[1280px] mx-auto flex justify-center items-center !pt-[70px] p-6 md:p-8">
         <div className="text-2xl md:text-3xl font-light tracking-wider">
           <Image src="/music-logo.svg" alt="logo" height={102} width={244} />
         </div>
       </nav>
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[80vh] mt-[70px] px-6 md:px-8">
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-[80vh] mt-[70px] px-6 md:px-8">
         <div className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 mb-8 md:mb-12">
           <button
             onClick={handlePrevious}
@@ -161,7 +184,7 @@ const MusicHeroSection = () => {
 
           <button
             onClick={handlePlayPause}
-            className="bg-white/20 w-[100px] h-[100px] cursor-pointer md:mr-[80px] md:w-[180px] md:h-[180px] lg:w-[237px] lg:h-[237px] rounded-full p-3 sm:p-4 md:p-5 lg:p-6 transition-all transform 5 shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-white/20 w-[100px] h-[100px] cursor-pointer md:mr-[80px] md:w-[180px] md:h-[180px] lg:w-[237px] lg:h-[237px] rounded-full p-3 sm:p-4 md:p-5 lg:p-6 transition-all transform shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={tracks.length === 0}
           >
             {isPlaying ? (
@@ -198,7 +221,6 @@ const MusicHeroSection = () => {
           </button>
         </div>
 
-        {/* Mobile & Tablet: Show only current track */}
         <div className="w-full flex justify-center items-center max-w-[1440px] mx-auto xl:hidden">
           <div
             className={`w-full px-4 text-center max-w-[700px] transition-transform duration-500 ease-in-out ${
@@ -219,10 +241,8 @@ const MusicHeroSection = () => {
           </div>
         </div>
 
-        {/* Large screens: Show three tracks (previous, current, next) */}
         <div className="w-full justify-center items-center mx-auto hidden xl:flex">
           <div className="flex justify-center items-center w-full max-w-[1600px]">
-            {/* Previous Track */}
             <div
               className={`flex-1 text-center transition-all duration-300 ease-in-out ${
                 hasPreviousTrack
@@ -251,7 +271,6 @@ const MusicHeroSection = () => {
               </div>
             </div>
 
-            {/* Current Track */}
             <div
               className={`flex-1 text-center opacity-100 transition-all duration-200 ease-in-out ${
                 direction === "left"
@@ -274,7 +293,6 @@ const MusicHeroSection = () => {
               </div>
             </div>
 
-            {/* Next Track */}
             <div
               className={`flex-1 text-center transition-all duration-300 ease-in-out ${
                 hasNextTrack ? "opacity-60" : "opacity-0 pointer-events-none"
@@ -303,7 +321,7 @@ const MusicHeroSection = () => {
           </div>
         </div>
       </div>
-      <footer className="text-white h-fit relative z-10 pt-[20px] md:pt-[30px] text-center pb-8 px-4">
+      <footer className="text-white h-fit relative z-20 pt-[20px] md:pt-[30px] text-center pb-8 px-4">
         <div className="flex justify-center mb-[30px]">
           <a
             href="https://instagram.com"
