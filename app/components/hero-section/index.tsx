@@ -140,7 +140,6 @@ const MusicHeroSection = () => {
           priority
         />
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/50 z-10"></div>
       </div>
 
       {/* Alternative CSS Background Method (comment out the Image above and uncomment this if needed) */}
