@@ -124,7 +124,10 @@ const MusicHeroSection = () => {
   }
 
   return (
-    <div className="hero-section relative bg-black text-white overflow-hidden min-h-screen">
+    <div
+      style={{ backgroundImage: `url('/background_samples.jpg')` }}
+      className="hero-section relative bg-black text-white overflow-hidden w-screen  bg-center bg-no-repeat bg-cover min-h-screen"
+    >
       <nav className="relative z-20 max-w-[1280px] mx-auto flex justify-center items-center !pt-[70px] p-6 md:p-8">
         <div className="text-2xl md:text-3xl font-light tracking-wider">
           <Image src="/music-logo.svg" alt="logo" height={102} width={244} />
@@ -321,20 +324,6 @@ const MusicHeroSection = () => {
       />
 
       <style jsx>{`
-        .hero-section {
-          background-image: url("/background_samples.jpg");
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-attachment: absolute;
-        }
-
-        /* Ensure content appears above overlay */
-        .hero-section > * {
-          position: relative;
-          z-index: 10;
-        }
-
         @keyframes slide-in-left {
           from {
             transform: translateX(100%);
