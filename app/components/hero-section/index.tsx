@@ -117,20 +117,25 @@ const MusicHeroSection = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center  bg-black">
-        <div ref={lottieContainerRef} className="w-full  object-cover" />
+        <div
+          ref={lottieContainerRef}
+          className="w-full h-[50vh] md:h-auto object-cover"
+        />
       </div>
     );
   }
 
   return (
     <div className="relative bg-black text-white overflow-hidden">
-      <Image
-        src="/background_sample.jpg"
-        alt="logo"
-        className="w-full h-full inset-0 absolute object-cover"
-        height={102}
-        width={244}
-      />
+      <div className="insect-0 w-full h-full absolute">
+        <Image
+          src="/background_sample.jpg"
+          alt="logo"
+          className=" h-full w-full object-contain bg-no-repeat bg-center"
+          height={102}
+          width={244}
+        />
+      </div>
 
       <nav className="relative z-10 max-w-[1280px] mx-auto flex justify-center items-center !pt-[70px] p-6 md:p-8">
         <div className="text-2xl md:text-3xl font-light tracking-wider">
@@ -232,7 +237,7 @@ const MusicHeroSection = () => {
               }`}
             >
               <div className="max-w-[700px] w-full px-4 mx-auto">
-                <h1 className="text-[36px] font-[800] tracking-wider mb-4 md:mb-6 whitespace-nowrap">
+                <h1 className="text-[36px] font-[800] tracking-wider mb-4 md:mb-6 whitespace-pre-wrap">
                   {hasPreviousTrack ? getTrackData(currentTrack - 1).title : ""}
                 </h1>
                 <div
@@ -257,7 +262,7 @@ const MusicHeroSection = () => {
               }`}
             >
               <div className="max-w-[700px] w-full px-4 mx-auto">
-                <h1 className="text-[54px] font-[800] tracking-wider mb-4 md:mb-6 whitespace-nowrap">
+                <h1 className="text-[54px] font-[800] tracking-wider mb-4 md:mb-6 whitespace-pre-wrap">
                   {currentTrackData.title}
                 </h1>
                 <div
