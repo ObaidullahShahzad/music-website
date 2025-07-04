@@ -2782,10 +2782,10 @@ styled-jsx@5.1.6:
   dependencies:
     client-only "0.0.1"
 
-stylelint-recommended-conf@^1.5.2:
-  version "0.0.1-security"
-  resolved "https://registry.yarnpkg.com/stylelint-recommended-conf/-/stylelint-recommended-conf-0.0.1-security.tgz#d6f419cbb16d561a8a5e4155c6f8a4744be5e502"
-  integrity sha512-yO0syZC5KyE28xuaqrNLDo18EY4zbI1MLydCWUOv2fdoAEqLOHvnNAbHXZNERLhGjLg44FmVkgNa2NZLLnKRtg==
+stylelint-config-recommended@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-7.0.0.tgz#7497372ae83ab7a6fffc18d7d7b424c6480ae15e"
+  integrity sha512-yGn84Bf/q41J4luis1AZ95gj0EQwRX8lWmGmBwkwBNSkpGSpl66XcPTulxGa/Z91aPoNGuIGBmFkcM1MejMo9Q==
 
 supports-color@^7.1.0:
   version "7.2.0"
