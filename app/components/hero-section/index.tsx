@@ -124,41 +124,7 @@ const MusicHeroSection = () => {
   }
 
   return (
-    <div className="relative bg-black text-white overflow-hidden min-h-screen">
-      {/* Background Image with multiple fallback methods */}
-      <div className="absolute inset-0 w-full h-full">
-        {/* Method 1: Using Next.js Image component for better optimization */}
-        <Image
-          src="/background_sample.jpg"
-          alt="Background"
-          fill
-          className="object-cover object-center"
-          style={{
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
-          priority
-        />
-        {/* Dark overlay */}
-      </div>
-
-      {/* Alternative CSS Background Method (comment out the Image above and uncomment this if needed) */}
-      {/* 
-      <div 
-        className="absolute inset-0 w-full h-full"
-        style={{
-          background: `
-            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('/background_sample.jpg')
-          `,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed'
-        }}
-      />
-      */}
-
+    <div className="hero-section relative bg-black text-white overflow-hidden min-h-screen">
       <nav className="relative z-20 max-w-[1280px] mx-auto flex justify-center items-center !pt-[70px] p-6 md:p-8">
         <div className="text-2xl md:text-3xl font-light tracking-wider">
           <Image src="/music-logo.svg" alt="logo" height={102} width={244} />
@@ -355,6 +321,20 @@ const MusicHeroSection = () => {
       />
 
       <style jsx>{`
+        .hero-section {
+          background-image: url("/background_samples.jpg");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-attachment: absolute;
+        }
+
+        /* Ensure content appears above overlay */
+        .hero-section > * {
+          position: relative;
+          z-index: 10;
+        }
+
         @keyframes slide-in-left {
           from {
             transform: translateX(100%);
