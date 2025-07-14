@@ -5,7 +5,7 @@ import MusicHeroSection from "./components/hero-section";
 export default function Home() {
   return (
     <>
-      <div className="bg-[#151515]">
+      <div className=" min-h-screen">
         <MusicHeroSection />
       </div>
     </>

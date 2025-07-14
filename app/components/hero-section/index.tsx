@@ -124,10 +124,15 @@ const MusicHeroSection = () => {
   }
 
   return (
-    <div
-      style={{ backgroundImage: `url('/background_samples.jpg')` }}
-      className="hero-section relative bg-black text-white overflow-hidden w-screen  bg-center bg-no-repeat bg-cover min-h-screen"
-    >
+    <div className="hero-section relative  text-white overflow-hidden  bg-center bg-no-repeat min-h-screen">
+      <div
+        className="absolute inset-0 "
+        style={{
+          backgroundImage: `url(/website_BG.png)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       <nav className="relative z-20 max-w-[1280px] mx-auto flex justify-center items-center !pt-[70px] p-6 md:p-8">
         <div className="text-2xl md:text-3xl font-light tracking-wider">
           <Image src="/music-logo.svg" alt="logo" height={102} width={244} />
@@ -229,7 +234,7 @@ const MusicHeroSection = () => {
                   {hasPreviousTrack ? getTrackData(currentTrack - 1).title : ""}
                 </h1>
                 <div
-                  className="text-[16px] pb-[30px] font-lexend font-[400] text-[#B66B6B6] leading-relaxed"
+                  className="text-[16px] pb-[30px] font-lexend font-[400] text-[#B6B6B6] leading-relaxed"
                   dangerouslySetInnerHTML={{
                     __html: hasPreviousTrack
                       ? getTrackData(currentTrack - 1).description
