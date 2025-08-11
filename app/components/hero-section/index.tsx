@@ -124,23 +124,37 @@ const MusicHeroSection = () => {
   }
 
   return (
-    <div className="hero-section relative  text-white overflow-hidden  bg-center bg-no-repeat min-h-screen">
-      <div
-        className="absolute inset-0 "
-        style={{
-          backgroundImage: `url(/website_BG.png)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <nav className="relative z-20 max-w-[1280px] mx-auto flex justify-center items-center !pt-[70px] p-6 md:p-8">
+    <div className="hero-section relative text-white overflow-hidden min-h-screen">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 hidden md:block w-full h-full object-cover md:object-fill z-0 sm:rotate-0 rotate-90 sm:transform-none transform origin-center scale-[2] sm:scale-100"
+      >
+        <source src="/bg_video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 lg:hidden md:hidden w-full h-full object-contain z-0  rotate-90 sm:transform-none transform origin-center video-scale"
+      >
+        <source src="/bg_video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <nav className="relative z-20 max-w-[1280px] mx-auto flex justify-center items-center pt-10">
         <div className="text-2xl md:text-3xl font-light tracking-wider">
           <Image src="/music-logo.svg" alt="logo" height={102} width={244} />
         </div>
       </nav>
 
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-[80vh] mt-[70px] px-6 md:px-8">
-        <div className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 mb-8 md:mb-12">
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-[62vh] px-6 md:px-8">
+        <div className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 mb-8 md:mb-6">
           <button
             onClick={handlePrevious}
             className="text-white transition-colors p-1 sm:p-2 md:mr-[80px] disabled:opacity-50 disabled:cursor-not-allowed"
@@ -151,13 +165,13 @@ const MusicHeroSection = () => {
               height={20}
               width={20}
               alt="previous"
-              className="w-6 h-6 md:w-[50px] md:h-[50px]"
+              className="w-6 h-6 md:w-[30px] md:h-[50px]"
             />
           </button>
 
           <button
             onClick={handlePlayPause}
-            className="bg-white/20 w-[100px] h-[100px] cursor-pointer md:mr-[80px] md:w-[180px] md:h-[180px] lg:w-[237px] lg:h-[237px] rounded-full p-3 sm:p-4 md:p-5 lg:p-6 transition-all transform shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-white/20 w-[100px] h-[100px] cursor-pointer md:mr-[80px] md:w-[180px] md:h-[180px] lg:w-[180px] lg:h-[180px] rounded-full p-3 sm:p-4 md:p-5 lg:p-6 transition-all transform shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={tracks.length === 0}
           >
             {isPlaying ? (
@@ -294,8 +308,8 @@ const MusicHeroSection = () => {
           </div>
         </div>
       </div>
-      <footer className="text-white h-fit relative z-20 pt-[20px] md:pt-[30px] text-center pb-8 px-4">
-        <div className="flex justify-center mb-[30px]">
+      <footer className="text-white h-fit relative z-20 pt-[20px] md:pt-[30px] text-center pb-6 px-4">
+        <div className="flex justify-center mb-[20px]">
           <a
             href="https://instagram.com"
             target="_blank"
@@ -313,7 +327,7 @@ const MusicHeroSection = () => {
         </div>
         <a
           href="mailto:music4matt@outlook.com"
-          className="text-[12px] md:text-[20px] mb-[30px] font-[500] font-lexend tracking-widest hover:underline block"
+          className="text-[12px] md:text-[20px] mb-[20px] font-[500] font-lexend tracking-widest hover:underline block"
         >
           music4matt@outlook.com
         </a>
@@ -329,6 +343,31 @@ const MusicHeroSection = () => {
       />
 
       <style jsx>{`
+        .video-scale {
+          transform: scale(0); /* Default scale at 425px and above */
+        }
+        @media (min-width: 426px) and (max-width: 767px) {
+          .video-scale {
+            transform: scale(1.2) !important;
+            object-fit: fill;
+          }
+        }
+
+        @media (min-width: 425px) {
+          .video-scale {
+            transform: scale(1.9);
+          }
+        }
+        @media (min-width: 376px) and (max-width: 424px) {
+          .video-scale {
+            transform: scale(2);
+          }
+        }
+        @media (max-width: 375px) {
+          .video-scale {
+            transform: scale(2.2);
+          }
+        }
         @keyframes slide-in-left {
           from {
             transform: translateX(100%);
