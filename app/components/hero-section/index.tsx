@@ -308,7 +308,7 @@ const MusicHeroSection = () => {
           </div>
         </div>
       </div>
-      <footer className="text-white h-fit relative z-20 pt-[20px] md:pt-[30px] text-center pb-6 px-4">
+      <footer className="text-white h-fit relative z-20 pt-[50px] md:pt-[30px] text-center pb-0 md:pb-6 px-4">
         <div className="flex justify-center mb-[20px]">
           <a
             href="https://instagram.com"
@@ -327,11 +327,11 @@ const MusicHeroSection = () => {
         </div>
         <a
           href="mailto:music4matt@outlook.com"
-          className="text-[12px] md:text-[20px] mb-[20px] font-[500] font-lexend tracking-widest hover:underline block"
+          className="text-[8px] md:text-[20px] mb-[10px] md:mb-[20px] font-[500] font-lexend tracking-widest hover:underline block"
         >
           music4matt@outlook.com
         </a>
-        <p className="text-[12px] md:text-[20px] font-[500] font-lexend tracking-widest">
+        <p className="text-[8px] md:text-[20px] font-[500] font-lexend tracking-widest">
           ©2025 4MATT - ALL RIGHT RESERVED
         </p>
       </footer>
@@ -355,7 +355,7 @@ const MusicHeroSection = () => {
 
         @media (min-width: 425px) {
           .video-scale {
-            transform: scale(1.9);
+            transform: scale(2.05);
           }
         }
         @media (min-width: 376px) and (max-width: 424px) {
